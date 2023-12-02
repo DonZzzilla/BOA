@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Bar Graph</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .chart {
+        width: 300px;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .bar {
+        background-color: #4caf50;
+        height: 30px;
+        margin: 5px;
+        transition: width 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chart">
+      <div class="bar" style="width: 10%"></div>
+      <div class="bar" style="width: 20%"></div>
+      <div class="bar" style="width: 30%"></div>
+      <div class="bar" style="width: 40%"></div>
+    </div>
+
+    <script>
+      // CSV data
+      const csvData = `
+    #,NAME:,SESSIONS
+    1,!Cara,EXEMPT
+    2,Alcyonaria,EXEMPT
+    3,AlphaBroVR,EXEMPT
+    4,AyooHenry,1
+    5,Bear,EXEMPT
+    6,Blangs,EXEMPT
+    7,Brad,1
+    8,ChaosYoman,7
+    9,Charlof,1
+    10,Chizy,EXEMPT
+    11,Crash,7
+    12,CrawlerTV,EXEMPT
+    13,Crumpetgobbler,EXEMPT
+    14,DonZzzilla,2
+    15,DoomTrooper,EXEMPT
+    16,dukester161,0
+    17,Exlipse,4
+    18,FogCabin,EXEMPT
+    19,GodOfGaming,EXEMPT
+    20,GrimReapIR,4
+    21,KOV_Hawk,7
+    22,LordOfPandas,1
+    23,Luty,13
+    24,Mayzelf,EXEMPT
+    25,MrAKUSA,EXEMPT
+    26,Snoxy,1
+    27,PlushBox ,EXEMPT
+    28,Racoon,EXEMPT
+    29,Reap Corked,7
+    30,Red,6
+    31,"sidewinder_0",8
+    32,Smixie,1
+    33,Snoozy,3
+    34,Spoon,EXEMPT
+    35,Taz,12
+    36,Universe,EXEMPT
+    37,Vex,EXEMPT
+    38,Wingman1033,5
+    39,Sui,0
+    40,Frost,7
+    41,Angel,0
+    42,Goldfish,0
+    43,King Chava,4
+    44,4,0
+  `;
+
+      // Parse CSV data
+      const rows = csvData
+        .trim()
+        .split("\n")
+        .map((row) => row.split(","));
+
+      // Extract sessions data
+      const sessions = rows.map((row) => parseInt(row[2].trim()) || 0);
+
+      // Update bar widths based on sessions data
+      const bars = document.querySelectorAll(".bar");
+      bars.forEach((bar, index) => {
+        bar.style.width = `${sessions[index] * 10}%`;
+      });
+    </script>
+  </body>
+</html>
